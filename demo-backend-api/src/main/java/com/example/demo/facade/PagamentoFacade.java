@@ -8,15 +8,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PagamentoFacade {
-
-    @Autowired private PagamentoRequestProducer producer;
+    @Autowired
+    private PagamentoRequestProducer producer;
 
     public String solicitarPagamento(PagamentoDto request) {
         try {
-            producer.intregar(request);
+            producer.integrar(request);
         } catch (JsonProcessingException e) {
             return "Ocorreu um erro ao solicitar o pagamento. " + e.getMessage();
         }
         return "Aguardando confirmação de Pagamento...";
+    }
+
+    public void erroPagamento(String payload) {
+        System.out.println("== Resposta Erro ==");
+    }
+
+    public void sucessoPagamento(String payload) {
+        System.out.println("== Sucesso Erro ==");
     }
 }

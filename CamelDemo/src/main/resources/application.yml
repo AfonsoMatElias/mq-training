@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: camel-demo
+  
+  cloud: 
+    compatibility-verifier:
+      enabled: false
+
+camel:
+  main:
+    shutdown-timeout: 5
+
+logging:
+  level:
+    root: INFO
+    br.com.fiap.minfin.eip.CamelDemo: DEBUG

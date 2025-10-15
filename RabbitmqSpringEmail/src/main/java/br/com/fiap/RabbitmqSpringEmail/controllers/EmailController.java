@@ -3,7 +3,14 @@ package br.com.fiap.RabbitmqSpringEmail.controllers;
 import java.util.Optional;
 import java.util.UUID;
 
+import br.com.fiap.RabbitmqSpringEmail.dtos.EmailRecord;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.afonsomatelias.Configurations.ConverterConfiguration;
+import io.github.afonsomatelias.IConverter;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -23,13 +30,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequiredArgsConstructor
 public class EmailController {
+    @Autowired
     EmailService emailService;
 
     @PostMapping("send-email")
     public ResponseEntity<EmailModel> sendEmail(
-        @RequestBody @Valid EmailDto emailDto
+        // @RequestBody @Valid EmailDto emailDto
+        @RequestBody @Valid EmailRecord emailDto
+
     ) {
         EmailModel emailModel = new EmailModel();
         BeanUtils.copyProperties(emailDto, emailModel);

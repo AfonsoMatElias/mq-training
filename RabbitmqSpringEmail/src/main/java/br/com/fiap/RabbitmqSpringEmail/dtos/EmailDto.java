@@ -26,9 +26,7 @@ public class EmailDto {
     @NotBlank
     private String text;
     
-    @NotBlank
     private LocalDateTime sendDateEmail;
     
-    @NotBlank
     private StatusEnum statusEmail;
 }

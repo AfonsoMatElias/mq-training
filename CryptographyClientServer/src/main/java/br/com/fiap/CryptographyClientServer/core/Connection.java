@@ -1,12 +1,13 @@
 package br.com.fiap.CryptographyClientServer.core;
 
-import br.com.fiap.CryptographyClientServer.CryptographyClientServerApplication;
+import br.com.fiap.CryptographyClientServer.CryptographyClientServer;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.Base64;
 
 public class Connection {
@@ -19,7 +20,8 @@ public class Connection {
         if (readBytes == 0)
             return "";
 
-        return Base64.getEncoder().encodeToString(infoBytes);
+        byte[] realBytes = Arrays.copyOf(infoBytes, readBytes);
+        return Base64.getEncoder().encodeToString(realBytes);
     }
 
     public static PublicKey receiveKey(Socket socket) throws Exception {
@@ -31,17 +33,20 @@ public class Connection {
         if (readBytes == 0)
             return null;
 
-        return CryptographyClientServerApplication.bytesToKey(infoBytes);
+        byte[] realBytes = Arrays.copyOf(infoBytes, readBytes);
+        return CryptographyClientServer.bytesToKey(realBytes);
     }
 
     public static void send(Socket socket, String content) throws IOException {
         byte[] requestBytes = Base64.getDecoder().decode(content);
         OutputStream out = socket.getOutputStream();
         out.write(requestBytes);
+        out.flush();
     }
 
     public static void sendKey(Socket socket, PublicKey key) throws IOException {
         OutputStream out = socket.getOutputStream();
         out.write(key.getEncoded());
+        out.flush();
     }
 }

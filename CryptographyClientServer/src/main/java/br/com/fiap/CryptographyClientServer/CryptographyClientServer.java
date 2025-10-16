@@ -10,9 +10,9 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 @SpringBootApplication
-public class CryptographyClientServerApplication {
+public class CryptographyClientServer {
 
-	public static KeyPair generatepublicPrivateKeys() throws NoSuchAlgorithmException {
+	public static KeyPair generatePublicPrivateKeys() throws NoSuchAlgorithmException {
 		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 		keyPairGenerator.initialize(2048);
 		return keyPairGenerator.generateKeyPair();
@@ -41,7 +41,6 @@ public class CryptographyClientServerApplication {
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
 
 		byte[] decryptedMessage = cipher.doFinal(messageBytes);
-
 		return new String(decryptedMessage, StandardCharsets.UTF_8);
 	}
 
@@ -52,10 +51,4 @@ public class CryptographyClientServerApplication {
 		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 		return keyFactory.generatePublic(keySpec);
 	}
-
-	public static void main(String[] args) {
-
-		SpringApplication.run(CryptographyClientServerApplication.class, args);
-	}
-
 }

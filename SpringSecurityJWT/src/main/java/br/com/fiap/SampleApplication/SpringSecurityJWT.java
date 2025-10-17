@@ -1,13 +1,13 @@
-package br.com.fiap.SpringSecurityJWT;
+package br.com.fiap.SampleApplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringSecurityJwtApplication {
+public class SpringSecurityJWT {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringSecurityJwtApplication.class, args);
+		SpringApplication.run(SpringSecurityJWT.class, args);
 	}
 
 }

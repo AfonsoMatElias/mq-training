@@ -36,7 +36,7 @@ public class OrderProcessingFlow extends RouteBuilder {
             .to("seda:highValueOrders")
             .end();
 
-        from("seda:validdOrders")
+        from("seda:validOrders")
             .filter(body().contains("amount="))
                     .log("Forwarding to Valid Order: ${body}")
             .to("seda:routerInput");

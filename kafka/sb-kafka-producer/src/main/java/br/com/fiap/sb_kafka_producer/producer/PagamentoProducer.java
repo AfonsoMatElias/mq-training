@@ -1,5 +1,7 @@
 package br.com.fiap.sb_kafka_producer.producer;
 
+import br.com.fiap.sb_kafka_producer.dto.PagamentoDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -20,5 +22,11 @@ public class PagamentoProducer {
     ) {
         this.kafkaTemplate = kafkaTemplate;
         this.objectMapper = objectMapper;
+    }
+
+    public String enviar(PagamentoDto pagamentoDto) throws JsonProcessingException {
+        String mensagem = objectMapper.writeValueAsString(pagamentoDto);
+        kafkaTemplate.send(topic, mensagem);
+        return "Pagamento enviado para o Kafka!";
     }
 }

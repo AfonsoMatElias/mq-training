@@ -1,10 +1,17 @@
 server:
   port: 8081
 
-spring:
-  application:
-    name: sb-kafka-producer
+# … configurações PayPal …
+paypal:
+  mode: sandbox
+  # mode: live      # para ambiente live
+  client-id: AXGpGZOwc_stBwx0wOJ1M21nRc_NwVRY-VsZ0iUBctWnQdYRVMUZHap-o5W5xSimIfT-MGCHVPgcTyEX
+  client-secret: EAB7UU2GqIU1nebF5GliA6SO1QzB-vICl11U7_H-fds931K5CH6FpB3RVwcRWJHEWmhcxWyfy0sUImv3
+  api-base-url: https://api-m.sandbox.paypal.com  # para sandbox (conta Personal)
+  # api-base-url: https://api-m.paypal.com         # para ambiente live (precisa de conta Business)
 
+# … configurações Spring Kafka …
+spring:
   kafka:
     bootstrap-servers: localhost:9092
     admin:
@@ -13,6 +20,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
+# … configurações de Tópicos …
 topicos:
   pagamento:
     request:
